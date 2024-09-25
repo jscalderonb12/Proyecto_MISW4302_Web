@@ -96,8 +96,11 @@ const Group: React.FC<GroupsProps> = ({ data }) => {
                   Eventos
                 </Typography>
               </div>
-              {EVENTS.map((event) => (
-                <div className="grid grid-cols-6 col-start-2 col-span-6 rounded-[12px]  background-secondary h-[95px]">
+              {EVENTS.map((event, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-6 col-start-2 col-span-6 rounded-[12px]  background-secondary h-[95px]"
+                >
                   <div className="flex-center  col-span-1 col-start-1">
                     <Typography className="text-[24px]">
                       {event.hour}
@@ -137,8 +140,11 @@ const Group: React.FC<GroupsProps> = ({ data }) => {
                 </Typography>
               </div>
               <div className="flex-col col-start-2 col-span-6 rounded-[12px] background-secondary h-[255px] pt-[20px] overflow-y-scroll">
-                {MEMBERS.map((member) => (
-                  <div className="grid grid-cols-6 h-[48px] mb-[10px]">
+                {MEMBERS.map((member, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-6 h-[48px] mb-[10px]"
+                  >
                     <div className="col-span-1 col-start-1 flex-center">
                       {member.rolIcon()}
                     </div>
