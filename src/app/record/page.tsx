@@ -5,8 +5,8 @@ import TextField from "@mui/material/TextField";
 
 const RecordPage = () => {
   return (
-    <div className="m-0 grid grid-cols-12">
-      <div className=" grid grid-cols-10 col-start-2 col-span-10 mt-[40px] h-[70px] mb-[30px]">
+    <div className="animate__animated animate__fadeIn m-0 grid grid-cols-12">
+      <div className="grid grid-cols-10 col-start-2 col-span-10 mt-[40px] h-[70px] mb-[30px]">
         <TextField
           id="standard-basic"
           className="m-0 boder-solid col-start-1 col-span-6 border-2"

@@ -2,7 +2,7 @@ import React from "react";
 
 const CreateAlarmPage = () => {
   return (
-    <div>
+    <div className="animate__animated animate__fadeIn">
       <h1>CreateAlarm Page</h1>
     </div>
   );

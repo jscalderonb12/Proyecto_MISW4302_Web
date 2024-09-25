@@ -41,7 +41,7 @@ const SideBar = () => {
           className: "side-bar-drawer",
         }}
       >
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <img src="favicon.png" className="side-bar-drawer-icon" alt="logo" />
         </div>
         <div>
@@ -64,7 +64,7 @@ const SideBar = () => {
             />
           </IconButton>
         </div>
-        <div className="side-bar-drawer-menu">
+        <div className="side-bar-drawer-menu animate__animated animate__fadeIn">
           <div
             onClick={() => handleNavigation("/")}
             className="side-bar-drawer-menu-container"
@@ -201,7 +201,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className="side-bar-container">
+      <div className="side-bar-container animate__animated animate__fadeIn">
         <div className="side-bar-menu flex-center">
           <IconButton
             disableRipple
