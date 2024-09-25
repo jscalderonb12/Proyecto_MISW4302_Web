@@ -13,12 +13,13 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-
+import { usePathname } from "next/navigation";
 import "../sideBar.css";
+import { SYSTEM } from "@/app/constants/system";
 
+const { ROUTES_DATA } = SYSTEM;
 const SideBar = () => {
   const router = useRouter();
-
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {
@@ -30,36 +31,8 @@ const SideBar = () => {
     toggleDrawer();
   };
 
-  return (
-    <>
-      <div className="side-bar-container">
-        <div className="side-bar-menu flex-center">
-          <IconButton
-            disableRipple
-            className="icon-button"
-            onClick={toggleDrawer}
-          >
-            <img src="icons/burger.svg" className="icon-main" alt="menu" />
-          </IconButton>
-        </div>
-
-        <div className="side-bar-content flex-center">
-          <div className="side-bar-home-input-container flex-center">
-            <input
-              type="text"
-              placeholder="Buscar alarma por nombre"
-              className="side-bar-home-input"
-            />
-            <img
-              src="icons/search.svg"
-              className="side-bar-home-input-icon"
-              alt="search"
-            />
-          </div>
-        </div>
-        <div className="side-bar-logo"></div>
-      </div>
-
+  const SideBarDrawer = () => {
+    return (
       <Drawer
         open={open}
         onClose={toggleDrawer}
@@ -68,7 +41,7 @@ const SideBar = () => {
           className: "side-bar-drawer",
         }}
       >
-        <div className="text-center">
+        <div className="flex justify-center">
           <img src="favicon.png" className="side-bar-drawer-icon" alt="logo" />
         </div>
         <div>
@@ -138,7 +111,10 @@ const SideBar = () => {
               Grupos
             </Typography>
           </div>
-          <div className="side-bar-drawer-menu-container">
+          <div
+            onClick={() => handleNavigation("/record")}
+            className="side-bar-drawer-menu-container"
+          >
             <IconButton
               disableRipple
               className="side-bar-drawer-menu-button-icon"
@@ -220,6 +196,45 @@ const SideBar = () => {
           </div>
         </div>
       </Drawer>
+    );
+  };
+
+  return (
+    <>
+      <div className="side-bar-container">
+        <div className="side-bar-menu flex-center">
+          <IconButton
+            disableRipple
+            className="icon-button"
+            onClick={toggleDrawer}
+          >
+            <img src="icons/burger.svg" className="icon-main" alt="menu" />
+          </IconButton>
+        </div>
+
+        <div className="side-bar-content flex-center">
+          {usePathname() === "/" ? (
+            <div className="side-bar-home-input-container flex-center">
+              <input
+                type="text"
+                placeholder="Buscar alarma por nombre"
+                className="side-bar-home-input"
+              />
+              <img
+                src="icons/search.svg"
+                className="side-bar-home-input-icon"
+                alt="search"
+              />
+            </div>
+          ) : (
+            <Typography className="flex-center title-size">
+              {ROUTES_DATA.find((r) => r.path === usePathname())?.title}
+            </Typography>
+          )}
+        </div>
+        <div className="side-bar-logo"></div>
+      </div>
+      <SideBarDrawer />
     </>
   );
 };
