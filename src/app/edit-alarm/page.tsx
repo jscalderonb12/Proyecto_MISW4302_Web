@@ -1,7 +1,7 @@
 import React from "react";
 
 const EditPage = () => {
-  return <div>EditPage</div>;
+  return <div className="animate__animated animate__fadeIn">EditPage</div>;
 };
 
 export default EditPage;

@@ -48,9 +48,20 @@ const RecordPage = () => {
         />
       </div>
 
-      {ALARMS_RECORD.map((alarmData: any, index: number) => (
-        <Alarms key={index} data={alarmData} isRecord />
-      ))}
+      {ALARMS_RECORD.map(
+        (
+          alarmData: {
+            icon: Function;
+            title: string;
+            hour: string;
+            frequency: string;
+            state?: string;
+          },
+          index: number,
+        ) => (
+          <Alarms key={index} data={alarmData} isRecord />
+        ),
+      )}
     </div>
   );
 };

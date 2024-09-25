@@ -10,9 +10,20 @@ export default function Home() {
         </Typography>
       </div>
 
-      {ALARMS.map((alarmData: any, index: number) => (
-        <Alarms key={index} data={alarmData} />
-      ))}
+      {ALARMS.map(
+        (
+          alarmData: {
+            icon: Function;
+            title: string;
+            hour: string;
+            frequency: string;
+            state?: string;
+          },
+          index: number,
+        ) => (
+          <Alarms key={index} data={alarmData} />
+        ),
+      )}
     </div>
   );
 }

@@ -5,8 +5,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
-import GradeIcon from "@mui/icons-material/Grade";
 import Modal from "@mui/material/Modal";
 import { EVENTS, MEMBERS } from "../constants/groups.mocks";
 interface Group {
