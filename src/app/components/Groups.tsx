@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Modal from "@mui/material/Modal";
 import { EVENTS, MEMBERS } from "../constants/groups.mocks";
 interface Group {
-  icon: Function;
+  icon: () => React.ReactNode;
   rol: string;
   title: string;
   members: string;

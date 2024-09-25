@@ -199,6 +199,8 @@ const SideBar = () => {
     );
   };
 
+  const pathname = usePathname();
+
   return (
     <>
       <div className="side-bar-container animate__animated animate__fadeIn">
@@ -213,7 +215,7 @@ const SideBar = () => {
         </div>
 
         <div className="side-bar-content flex-center">
-          {usePathname() === "/" ? (
+          {pathname === "/" ? (
             <div className="side-bar-home-input-container flex-center">
               <input
                 type="text"
@@ -228,7 +230,7 @@ const SideBar = () => {
             </div>
           ) : (
             <Typography className="flex-center title-size">
-              {ROUTES_DATA.find((r) => r.path === usePathname())?.title}
+              {ROUTES_DATA.find((r) => r.path === pathname)?.title}
             </Typography>
           )}
         </div>

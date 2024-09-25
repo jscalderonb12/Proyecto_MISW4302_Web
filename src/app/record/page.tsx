@@ -51,7 +51,7 @@ const RecordPage = () => {
       {ALARMS_RECORD.map(
         (
           alarmData: {
-            icon: Function;
+            icon: () => React.ReactNode;
             title: string;
             hour: string;
             frequency: string;
