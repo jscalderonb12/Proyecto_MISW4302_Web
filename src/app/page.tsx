@@ -13,7 +13,7 @@ export default function Home() {
       {ALARMS.map(
         (
           alarmData: {
-            icon: Function;
+            icon: () => React.ReactNode;
             title: string;
             hour: string;
             frequency: string;

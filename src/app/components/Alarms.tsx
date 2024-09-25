@@ -2,7 +2,7 @@ import { Switch, Typography } from "@mui/material";
 import React from "react";
 
 interface Alarm {
-  icon: Function;
+  icon: () => React.ReactNode;
   title: string;
   hour: string;
   frequency: string;

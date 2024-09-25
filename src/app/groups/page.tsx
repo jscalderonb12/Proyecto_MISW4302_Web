@@ -9,7 +9,7 @@ const GroupsPage = () => {
       {GROUPS.map(
         (
           groupData: {
-            icon: Function;
+            icon: () => React.ReactNode;
             rol: string;
             title: string;
             members: string;
