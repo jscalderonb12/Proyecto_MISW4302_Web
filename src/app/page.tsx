@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import Alarms from "@/app/components/Alarms";
-import { ALARMS } from "@/app/constants/alarms.mocks";
+import { ALARMS, IAlarm } from "@/app/constants/alarms.mocks";
 export default function Home() {
   return (
     <div className="animate__animated animate__fadeIn m-0 grid grid-cols-12">
@@ -10,20 +10,9 @@ export default function Home() {
         </Typography>
       </div>
 
-      {ALARMS.map(
-        (
-          alarmData: {
-            icon: () => React.ReactNode;
-            title: string;
-            hour: string;
-            frequency: string;
-            state?: string;
-          },
-          index: number,
-        ) => (
-          <Alarms key={index} data={alarmData} />
-        ),
-      )}
+      {ALARMS.map((alarmData: IAlarm, index: number) => (
+        <Alarms key={index} data={alarmData} />
+      ))}
     </div>
   );
 }

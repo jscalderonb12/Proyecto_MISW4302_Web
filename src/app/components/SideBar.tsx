@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import { Typography } from "@mui/material";
 import AddAlarmRoundedIcon from "@mui/icons-material/AddAlarmRounded";
 import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
 import RestoreRoundedIcon from "@mui/icons-material/RestoreRounded";
@@ -13,22 +11,19 @@ import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import LocalPharmacyIcon from "@mui/icons-material/LocalPharmacy";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { usePathname } from "next/navigation";
-import "../sideBar.css";
+import { Typography } from "@mui/material";
+import { usePathname, useSearchParams } from "next/navigation";
 import { SYSTEM } from "@/app/constants/system";
+import Link from "next/link";
+import "../sideBar.css";
 
 const { ROUTES_DATA } = SYSTEM;
+
 const SideBar = () => {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = () => {
     setOpen((prev) => !prev);
-  };
-
-  const handleNavigation = (path: string): void => {
-    router.push(path);
-    toggleDrawer();
   };
 
   const SideBarDrawer = () => {
@@ -42,7 +37,7 @@ const SideBar = () => {
         }}
       >
         <div className="flex justify-center ">
-          <img src="favicon.png" className="side-bar-drawer-icon" alt="logo" />
+          <img src="/favicon.png" className="side-bar-drawer-icon" alt="logo" />
         </div>
         <div>
           <Typography
@@ -59,14 +54,16 @@ const SideBar = () => {
             onClick={toggleDrawer}
           >
             <img
-              src="icons/close.svg"
+              src="/icons/close.svg"
               className="side-bar-drawer-close-icon elevation-5"
             />
           </IconButton>
         </div>
         <div className="side-bar-drawer-menu animate__animated animate__fadeIn">
-          <div
-            onClick={() => handleNavigation("/")}
+          <Link
+            href="/"
+            replace
+            onClick={toggleDrawer}
             className="side-bar-drawer-menu-container"
           >
             <IconButton
@@ -74,7 +71,7 @@ const SideBar = () => {
               className="side-bar-drawer-menu-button-icon"
             >
               <img
-                src="icons/home.svg"
+                src="/icons/home.svg"
                 className="side-bar-drawer-menu-icon elevation-5"
                 alt="close"
               />
@@ -82,9 +79,10 @@ const SideBar = () => {
             <Typography className="flex-center side-bar-drawer-menu-title ">
               Inicio
             </Typography>
-          </div>
-          <div
-            onClick={() => handleNavigation("/create-alarm")}
+          </Link>
+          <Link
+            href="/create-alarm"
+            onClick={toggleDrawer}
             className="side-bar-drawer-menu-container"
           >
             <IconButton
@@ -96,9 +94,10 @@ const SideBar = () => {
             <Typography className="flex-center side-bar-drawer-menu-title ">
               Crear alarma remota
             </Typography>
-          </div>
-          <div
-            onClick={() => handleNavigation("/groups")}
+          </Link>
+          <Link
+            href={"/groups"}
+            onClick={toggleDrawer}
             className="side-bar-drawer-menu-container"
           >
             <IconButton
@@ -110,9 +109,10 @@ const SideBar = () => {
             <Typography className="flex-center side-bar-drawer-menu-title ">
               Grupos
             </Typography>
-          </div>
-          <div
-            onClick={() => handleNavigation("/record")}
+          </Link>
+          <Link
+            href={"/record"}
+            onClick={toggleDrawer}
             className="side-bar-drawer-menu-container"
           >
             <IconButton
@@ -124,7 +124,7 @@ const SideBar = () => {
             <Typography className="flex-center side-bar-drawer-menu-title ">
               Historial
             </Typography>
-          </div>
+          </Link>
           <div className="side-bar-drawer-menu-container">
             <IconButton
               disableRipple
@@ -153,7 +153,7 @@ const SideBar = () => {
               className="side-bar-drawer-menu-button-icon"
             >
               <img
-                src="icons/library.svg"
+                src="/icons/library.svg"
                 className="side-bar-drawer-menu-icon elevation-5"
               />
             </IconButton>
@@ -200,7 +200,7 @@ const SideBar = () => {
   };
 
   const pathname = usePathname();
-
+  const rootPath = pathname.split("/")[1];
   return (
     <>
       <div className="side-bar-container animate__animated animate__fadeIn">
@@ -210,7 +210,7 @@ const SideBar = () => {
             className="icon-button"
             onClick={toggleDrawer}
           >
-            <img src="icons/burger.svg" className="icon-main" alt="menu" />
+            <img src="/icons/burger.svg" className="icon-main" alt="menu" />
           </IconButton>
         </div>
 
@@ -223,14 +223,14 @@ const SideBar = () => {
                 className="side-bar-home-input"
               />
               <img
-                src="icons/search.svg"
+                src="/icons/search.svg"
                 className="side-bar-home-input-icon"
                 alt="search"
               />
             </div>
           ) : (
             <Typography className="flex-center title-size">
-              {ROUTES_DATA.find((r) => r.path === pathname)?.title}
+              {ROUTES_DATA.find((r) => r.path.includes(rootPath))?.title}
             </Typography>
           )}
         </div>

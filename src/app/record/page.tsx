@@ -1,7 +1,8 @@
 import React from "react";
 import Alarms from "../components/Alarms";
-import { ALARMS_RECORD } from "../constants/alarms.mocks";
+import { ALARMS_RECORD, IAlarm } from "../constants/alarms.mocks";
 import TextField from "@mui/material/TextField";
+import { FormControl, InputLabel, NativeSelect } from "@mui/material";
 
 const RecordPage = () => {
   return (
@@ -20,48 +21,47 @@ const RecordPage = () => {
           }}
           sx={{ margin: 0 }}
         />
-        <TextField
-          id="standard-basic"
-          className="m-0 boder-solid border-2 col-start-7 col-span-2 ml-[40px]"
-          label="Categoría"
-          variant="standard"
-          InputProps={{
-            style: { color: "white", fontSize: "20px" },
-          }}
-          InputLabelProps={{
-            style: { color: "white", fontSize: "20px" },
-          }}
-          sx={{ margin: 0 }}
-        />
-        <TextField
-          id="standard-basic"
-          className="m-0 boder-solid border-2 col-start-9 col-span-2 ml-[40px]"
-          label="Acción"
-          variant="standard"
-          InputProps={{
-            style: { color: "white", fontSize: "20px" },
-          }}
-          InputLabelProps={{
-            style: { color: "white", fontSize: "20px" },
-          }}
-          sx={{ margin: 0 }}
-        />
+
+        <FormControl className="m-0 boder-solid border-2 col-start-7 col-span-2 ml-[40px]">
+          <InputLabel
+            style={{ color: "#fff" }}
+            variant="standard"
+            htmlFor="age-select-1"
+          >
+            Frecuencia
+          </InputLabel>
+          <NativeSelect
+            style={{ color: "#fff" }}
+            className="text-[20px]"
+            defaultValue={"Gym"}
+          >
+            <option value={"Gym"}>Gym</option>
+            <option value={"Estudio"}>Estudio</option>
+            <option value={"Despertador"}>Despertador</option>
+          </NativeSelect>
+        </FormControl>
+        <FormControl className="m-0 boder-solid border-2 col-start-9 col-span-2 ml-[40px]">
+          <InputLabel
+            style={{ color: "#fff" }}
+            variant="standard"
+            htmlFor="age-select-1"
+          >
+            Acción
+          </InputLabel>
+          <NativeSelect
+            style={{ color: "#fff" }}
+            className="text-[20px]"
+            defaultValue={"Descartado"}
+          >
+            <option value={"Descartado"}>Descartado</option>
+            <option value={"Pospuesto"}>Pospuesto</option>
+          </NativeSelect>
+        </FormControl>
       </div>
 
-      {ALARMS_RECORD.map(
-        (
-          alarmData: {
-            icon: () => React.ReactNode;
-            title: string;
-            hour: string;
-            frequency: string;
-            state?: string;
-          },
-          index: number,
-        ) => (
-          <Alarms key={index} data={alarmData} isRecord />
-        ),
-      )}
+      {ALARMS_RECORD.map((alarmData: IAlarm, index: number) => (
+        <Alarms key={index} data={alarmData} isRecord />
+      ))}
     </div>
   );
 };

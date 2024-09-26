@@ -1,18 +1,44 @@
+"use client";
 import {
   Button,
   FormControl,
   IconButton,
   InputLabel,
+  Link,
   NativeSelect,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { FC, useEffect } from "react";
+import { redirect } from "next/navigation";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import TextFieldsIcon from "@mui/icons-material/TextFields";
 import ImageIcon from "@mui/icons-material/Image";
-import Link from "next/link";
-const CreateAlarmPage = () => {
+import { ALARMS, IAlarm } from "@/app/constants/alarms.mocks";
+interface PageProps {
+  params: { id: number };
+}
+
+const EditAlarmPage: FC<PageProps> = ({ params }) => {
+  const { id } = params;
+  const [alarm, setAlarm] = React.useState<IAlarm | null>(null);
+  const [title, setTitle] = React.useState<string>("");
+  const [frequency, setFrequency] = React.useState<string | undefined>("");
+  const [category, setCategory] = React.useState<string | undefined>("");
+
+  useEffect(() => {
+    const alarmId = Number(id);
+    const editedAlarm = ALARMS.find((alarm) => alarm.id === alarmId);
+    if (isNaN(alarmId) || !editedAlarm) {
+      redirect("/");
+    } else {
+      setAlarm(editedAlarm);
+      setTitle(editedAlarm.title);
+      setFrequency(editedAlarm.frequencyValue);
+      setCategory(editedAlarm.category);
+    }
+  }, [id]);
+
   return (
     <div className="animate__animated animate__fadeIn  mt-[40px] grid grid-cols-12">
       <div className="col-span-2 col-start-6  grid grid-cols-2 h-[48px]">
@@ -23,15 +49,15 @@ const CreateAlarmPage = () => {
           <Typography className="text-[24px]">Minutos</Typography>
         </div>
       </div>
-      <div className="col-span-2 col-start-6  flex h-[112px] ">
+      <div className="col-span-2 col-start-6  flex h-[112px]">
         <div className=" flex-1 flex-center shadow-2xl">
-          <Typography className="text-[96px]">18</Typography>
+          <Typography className="text-[96px]">{alarm?.hourDetail}</Typography>
         </div>
         <div className=" flex-center w-[21px]">
           <Typography className="text-[96px]">:</Typography>
         </div>
         <div className=" flex-1 flex-center shadow-2xl">
-          <Typography className="text-[96px]">00</Typography>
+          <Typography className="text-[96px]">{alarm?.minuteDetail}</Typography>
         </div>
       </div>
       <div className="col-span-6 col-start-4 mt-[60px] h-[530px] grid-cols-6 background-secondary rounded-[12px] grid grid-rows-5 pt-[50px]">
@@ -47,7 +73,7 @@ const CreateAlarmPage = () => {
             <NativeSelect
               style={{ color: "#fff" }}
               className="text-[20px]"
-              defaultValue={"Única vez"}
+              value={frequency}
             >
               <option value={"Única vez"}>Única vez</option>
               <option value={"Diaría"}>Diaría</option>
@@ -62,12 +88,12 @@ const CreateAlarmPage = () => {
               variant="standard"
               htmlFor="age-select-2"
             >
-              Ctegoría
+              Categoría
             </InputLabel>
             <NativeSelect
               style={{ color: "#fff" }}
               className="text-[20px]"
-              value={"Gym"}
+              value={category}
             >
               <option value={"Gym"}>Gym</option>
               <option value={"Estudio"}>Estudio</option>
@@ -82,6 +108,7 @@ const CreateAlarmPage = () => {
             className="m-0 boder-solid col-start-1 col-span-6 border-2"
             label="Nombre"
             variant="standard"
+            value={title}
             InputProps={{
               style: { color: "white", fontSize: "20px" },
             }}
@@ -96,7 +123,7 @@ const CreateAlarmPage = () => {
             <Typography className="text-[20px]">Sonido de alarma</Typography>
             <div className="flex flex-row justify-center items-center gap-[24px]">
               <img
-                src="icons/spotify.svg"
+                src="/icons/spotify.svg"
                 className="w-[48px] h-[48px] elevation-5"
                 alt="spotify"
               />
@@ -139,4 +166,4 @@ const CreateAlarmPage = () => {
   );
 };
 
-export default CreateAlarmPage;
+export default EditAlarmPage;

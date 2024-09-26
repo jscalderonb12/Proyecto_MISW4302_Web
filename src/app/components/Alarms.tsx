@@ -1,16 +1,9 @@
 import { Switch, Typography } from "@mui/material";
+import Link from "next/link";
 import React from "react";
-
-interface Alarm {
-  icon: () => React.ReactNode;
-  title: string;
-  hour: string;
-  frequency: string;
-  state?: string;
-}
-
+import { IAlarm } from "@/app/constants/alarms.mocks";
 interface AlarmsProps {
-  data: Alarm;
+  data: IAlarm;
   isRecord?: boolean;
 }
 
@@ -24,7 +17,9 @@ const Alarms: React.FC<AlarmsProps> = ({ data, isRecord }) => {
         </Typography>
       </div>
       <div className="flex items-center  col-span-4  col-start-3">
-        <Typography className=" body-size">{data.title}</Typography>
+        <Link href={"/edit-alarm" + "/" + data.id}>
+          <Typography className=" body-size">{data.title}</Typography>
+        </Link>
       </div>
       <div className="flex-center  col-span-1  col-start-7">
         <Typography className="flex-center body-size">
